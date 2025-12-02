@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VogueMart</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/logo.png">
+</head>
+<body style="background-color:#214341;">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+  <img src="/images/logo.png" alt="VogueMart Logo" style="height:40px; width:auto; margin-right:10px;">
+  <span>VogueMart</span>
+</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/products">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="/cart">Cart</a></li>
+
+          <% if (user) { %>
+            <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+            <li class="nav-item"><a href="/logout" class="btn btn-outline-light ms-lg-2">Logout</a></li>
+          <% } else { %>
+            <li class="nav-item"><a href="/login" class="btn btn-outline-light ms-lg-2">Login</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Search & Tags -->
+  <section class="py-3" style="background-color: #024558; color: #f8f9fa;">
+    <div class="container">
+      <!-- Search -->
+      <form class="d-flex mb-3" method="GET" action="/products">
+        <input type="text" class="form-control me-2" placeholder="Search products..." name="search" value="<%= searchQuery %>">
+        <button type="submit" class="btn btn-outline-light">Search</button>
+      </form>
+
+      <!-- Tags -->
+      <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <% allTags.forEach(tag => { %>
+          <a href="/products?search=<%= tag %>" class="btn btn-outline-light btn-sm px-3"><%= tag %></a>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Listing -->
+  <section class="py-5" style="background-color:#024558; color:#fff;">
+    <div class="container">
+      <div class="row g-4">
+        <% if (products.length > 0) { %>
+          <% products.forEach(p => { %>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card shadow-sm p-2" style="background-color:#b2ced5;">
+                <a href="/product/<%= p._id %>">
+                  <img src="<%= p.image || 'https://via.placeholder.com/200' %>" class="card-img-top rounded" style="height: 300px; object-fit: cover;">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title"><%= p.name %></h5>
+                  <p class="card-text">₹ <%= p.price %></p>
+                  <a href="/add-to-cart/<%= p._id %>" class="btn w-100" style="background-color:#FFE797">Add to Cart</a>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p class="text-center text-muted">No products found.</p>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

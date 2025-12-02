@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VogueMart</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  >
+    <link rel="icon" type="image/png" href="/images/logo.png">
+<link rel="stylesheet" href="/Style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+  <img src="/images/logo.png" alt="VogueMart Logo" style="height:40px; width:auto; margin-right:10px;">
+  <span>VogueMart</span>
+</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart">Cart</a>
+          </li>
+          <% if (user) { %>
+  <li class="nav-item">
+    <a href="/profile" class="nav-link">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a href="/logout" class="btn btn-outline-light ms-lg-2">Logout</a>
+  </li>
+<% } else { %>
+  <li class="nav-item">
+    <a href="/login" class="btn btn-outline-light ms-lg-2">Login</a>
+  </li>
+<% } %>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+ <section class="pb-0" style="background-color: #024558; color: #f8f9fa;">
+  <div class="container-fluid px-0">
+    <div class="row g-0">
+      <div class="col-12">
+        <div class="overflow-hidden shadow-sm">
+          <img
+            src="https://www.hemswell-antiques.com/images/uploads/blog_images/c48297806d52d413ff70520b143a92492dd3c02b_bEu7.jpeg"
+            alt="VogueMart Banner"
+            class="img-fluid w-100"
+            style="object-fit: cover; max-height: 370px;"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Hero -->
+  <section class="py-5" style="background-color: #024558; color: #f8f9fa;">
+    <div class="container">
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold mb-3">Welcome to VogueMart</h1>
+          <p class="lead mb-4" style="color: #e2e6ea;">
+            Discover the latest fashion trends with premium quality at the best prices.
+          </p>
+          <button id="heroShop" class="btn  btn-lg px-4 text-dark" style="background-color:#FFE797">
+            <a href="/products" style="text-decoration: none;color:rgb(15, 12, 12)">Shop Now</a>
+          </button>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img
+            src="https://assets.myntassets.com/h_1440,q_75,w_1080/v1/assets/images/10686028/2024/6/21/335e6cb9-a51c-4f50-9b23-90775899276a1718972512096-DENNISON-Men-Teal-Blue-Classic-Regular-Fit-Solid-Formal-Shir-1.jpg"
+            class="img-fluid rounded-4 shadow-sm"
+            alt="Fashion Preview"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+        <!-- Product Suggestions -->
+  <section class="py-5" style="background-color:#024558; color:#fff;">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h4">Customer Suggestions For You</h2>
+        <a href="/products" class="btn btn-sm btn-outline-light">View All</a>
+      </div>
+
+      <div id="products" class="row g-4">
+        <% if (products && products.length > 0) { %>
+          <% products.slice(0,3).forEach(product => { %>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card vogue-card h-100 shadow-sm">
+                <a href="/product/<%= product._id %>">
+                  <img src="<%= product.image %>" class="card-img-top" style="height:300px; object-fit:cover;">
+                </a>
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title"><%= product.name %></h5>
+                  <p class="fw-bold mb-3">₹<%= product.price %></p>
+
+                  <a href="/add-to-cart/<%= product._id %>" 
+                    class="btn mt-auto text-dark" style="background-color:#FFE797">
+                    Add to Cart
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p>No products available.</p>
+        <% } %>
+      </div>
+
+    </div>
+  </section>
+
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark text-white">
+    <div class="container text-center small">
+      © 2025 VogueMart | All Rights Reserved
+    </div>
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+
+</body>
+</html>

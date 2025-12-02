@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VogueMart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="icon" type="image/png" href="/images/logo.png">
+</head>
+
+<body style="background-color:#214341;">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+     <a class="navbar-brand d-flex align-items-center" href="/">
+  <img src="/images/logo.png" alt="VogueMart Logo" style="height:40px; width:auto; margin-right:10px;">
+  <span>VogueMart</span>
+</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart">Cart</a>
+          </li>
+          <% if (user) { %>
+  <li class="nav-item">
+    <a href="/profile" class="nav-link">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a href="/logout" class="btn btn-outline-light ms-lg-2">Logout</a>
+  </li>
+<% } else { %>
+  <li class="nav-item">
+    <a href="/login" class="btn btn-outline-light ms-lg-2">Login</a>
+  </li>
+<% } %>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="container my-4">
+    <h2 class="mb-4 text-light">Your Cart</h2>
+    <% if (cart.length === 0) { %>
+        <div class="alert alert-warning">Your cart is empty.</div>
+    <% } else { %>
+        <% cart.forEach(item => { %> <!--displaying cart products-->
+            <div class="card mb-3 shadow-sm p-3" style="background-color:#b2ced5;">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <img src="<%= item.image %>" class="img-fluid rounded" style="height:150px; object-fit:cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <h4><%= item.name %></h4>
+                        <p class="text-success">₹ <%= item.price %></p>
+                    </div>
+                    <div class="col-md-3 mt-3 d-flex flex-column justify-content-around">
+                        <a href="/purchase/<%= item._id %>" class="btn btn-success w-100">Buy Now</a>
+                        <a href="/remove-from-cart/<%= item._id %>" class="btn btn-danger w-100">Remove</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% } %>
+    <a href="/products" class="btn btn-secondary mt-3">Continue Shopping</a>
+</div>
+</body>
+</html>

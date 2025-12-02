@@ -1,0 +1,12 @@
+.vogue-card {
+  border: 1px solid #ebf1f2;
+  background-color: #024558 !important;
+  color: #f8f9fa;
+}
+.vogue-card .card-text {
+  color: #e2e6ea;
+}
+.vogue-card .price {
+  color: #ffffff;
+  font-weight: 600;
+}

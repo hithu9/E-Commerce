@@ -1,0 +1,152 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.payment-container {
+  max-width: 500px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.payment-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.payment-methods label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6f61;
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pay-btn:hover {
+  background-color: #ff4a3a;
+}
+/* Page Background */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8; /* VogueMart background */
+  margin: 0;
+  padding: 0;
+}
+
+/* Payment Card Container */
+.payment-container {
+  max-width: 500px;
+  margin: 50px auto;
+  background-color: #fff; /* Card white */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border-top: 5px solid #ff6f61; /* Theme top border accent */
+}
+
+/* Heading */
+.payment-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ff6f61; /* Theme color heading */
+  font-weight: 600;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333; /* Dark text */
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #ff6f61; /* Theme color on focus */
+  box-shadow: 0 0 8px rgba(255,111,97,0.2);
+  outline: none;
+}
+
+/* Payment Methods */
+.payment-methods label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #555;
+}
+
+/* Pay Button */
+.pay-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6f61; /* Theme button */
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pay-btn:hover {
+  background-color: #e85a4f; /* Darker hover */
+}
+
+/* Responsive Mobile */
+@media (max-width: 600px) {
+  .payment-container {
+    margin: 30px 20px;
+    padding: 25px;
+  }
+}
