@@ -12,7 +12,7 @@
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "body-parser": "^2.2.1",
-    "connect-mongo": "^6.0.0",
+    "connect-mongo": "^3.2.0",
     "connect-redis": "^9.0.0",
     "dotenv": "^16.6.1",
     "ejs": "^3.1.10",
