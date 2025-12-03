@@ -9,6 +9,7 @@ const bcrypt = require("bcryptjs");
 
 const Product = require("./models/products");
 const User = require("./models/User");
+const MongoStore = require('connect-mongo');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,13 +25,21 @@ app.set("view engine", "ejs");
 app.use(bodyparser.urlencoded({ extended: true }));
 
 // --- SESSION ---
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "vogueMartSecretKey",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'vogueMartSecretKey',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    ttl: 14 * 24 * 60 * 60, // 14 days
+    autoRemove: 'native'
+  }),
+  cookie: {
+    maxAge: 14 * 24 * 60 * 60 * 1000, // 14 days
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production'
+  }
+}));
 
 // --- MIDDLEWARE: pass user to templates ---
 app.use((req, res, next) => {
@@ -205,8 +214,8 @@ app.post("/place-order", (req, res) => {
 
 // --- DATABASE CONNECTION ---
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected ✓"))
-  .catch((err) => console.log("DB Error ❌:", err));
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.log("❌ DB Error:", err));
 
 // --- START SERVER ---
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
