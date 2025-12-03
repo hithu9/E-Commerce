@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
-
+const MongoStore = require('connect-mongo')(session);
 const Product = require('./models/products');
 const User = require('./models/User');
 
@@ -24,11 +24,15 @@ app.set('view engine', 'ejs');
 app.use(bodyparser.urlencoded({ extended: true }));
 
 // --- SESSION ---
+
 app.use(session({
-  secret: 'vogueMartSecretKey',
+  secret: process.env.SESSION_SECRET || 'vogueMartSecretKey',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false,
+  store: new MongoStore({ url: process.env.MONGO_URI, ttl: 14 * 24 * 60 * 60 }),
+  cookie: { maxAge: 14*24*60*60*1000, httpOnly: true, secure: process.env.NODE_ENV==='production' }
 }));
+
 
 // --- MIDDLEWARE: pass user to templates ---
 app.use((req, res, next) => {
