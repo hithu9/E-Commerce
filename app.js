@@ -204,10 +204,9 @@ app.post("/place-order", (req, res) => {
 });
 
 // --- DATABASE CONNECTION ---
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Database Connected ✔"))
-  .catch((err) => console.log("DB Error ❌: " + err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected ✓"))
+  .catch((err) => console.log("DB Error ❌:", err));
 
 // --- START SERVER ---
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
